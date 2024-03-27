@@ -21,11 +21,11 @@ export class LabsComponent {
   disabled = true;
   img = 'https://w3schools.com/howto/img_avatar.png';
 
-  person = {
-    name: 'Nicolas',
-    age: 18,
+  person = signal({
+    name: 'jesus',
+    age: 15,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
-  };
+  });
   clickHandler() {
     alert('hola');
   }
@@ -34,6 +34,14 @@ export class LabsComponent {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
     this.name.set(newValue);
+  }
+
+  changeAge(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update((prevState) => {
+      return { ...prevState, age: parseInt(newValue) };
+    });
   }
 
   keydownHandler(event: KeyboardEvent) {
