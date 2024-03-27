@@ -1,4 +1,5 @@
-<p>labs works!</p>
+<div class="container">
+  <p>labs works!</p>
 <h1>hola este es mi primer proyecto</h1>
 <h2>{{welcome}}</h2>
 <ul>
@@ -14,3 +15,18 @@
 <input type="text" [value]="person.age">
 <button [disabled]="disabled">Click me</button>
 <p>person: {{person.name}}</p>
+<hr />
+<button (click)="clickHandler()">Click me</button>
+<button (dblclick)="clickHandler()">Click me</button>
+<p>(change)</p>
+<input type="number" [value]="person.age" (change)="changeHandler($event)">
+<p>(change)</p>
+<input type="text" [value]="person.name" (change)="changeHandler($event)">
+<p>(keydown)</p>
+<input type="text" [value]="person.name" (keydown)="keydownHandler($event)">
+<p>(keydown shift)</p>
+<input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()">
+<p>(keyup)</p>
+<input type="text" [value]="person.name" (keyup)="changeTextKeyboard($event)">
+<p>I'm the input content => {{ valueInput }}</p>
+</div>
