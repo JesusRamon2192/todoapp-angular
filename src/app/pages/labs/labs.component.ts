@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css',
 })
@@ -21,11 +21,23 @@ export class LabsComponent {
   disabled = true;
   img = 'https://w3schools.com/howto/img_avatar.png';
 
-  person = {
-    name: 'Nicolas',
-    age: 18,
+  person = signal({
+    name: 'leumiriano',
+    age: 15,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
-  };
+  });
+
+  colorCtrl = new FormControl();
+  widthCtrl = new FormControl(50, {
+    nonNullable: true,
+  });
+
+  constructor() {
+    this.colorCtrl.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
+  }
+
   clickHandler() {
     alert('hola');
   }
@@ -34,6 +46,22 @@ export class LabsComponent {
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
     this.name.set(newValue);
+  }
+
+  changeAge(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update((prevState) => {
+      return { ...prevState, age: parseInt(newValue) };
+    });
+  }
+
+  changeName(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update((prevState) => {
+      return { ...prevState, name: newValue };
+    });
   }
 
   keydownHandler(event: KeyboardEvent) {

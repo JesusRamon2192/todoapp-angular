@@ -11,23 +11,23 @@
 <h2>{{'Hola'.repeat(4)}}</h2>
 <p>Hola soy {{name()}} y mi edad es {{age}}</p>
 <hr/>
-<img [src] ="person.avatar" alt="">
-<input type="text" [value]="person.age">
+<img [src] ="person().avatar" alt="">
+<input type="text" [value]="person().age">
 <button [disabled]="disabled">Click me</button>
-<p>person: {{person.name}}</p>
+<p>person: {{person().name}}</p>
 <hr />
 <button (click)="clickHandler()">Click me</button>
 <button (dblclick)="clickHandler()">Click me</button>
 <p>(change)</p>
-<input type="number" [value]="person.age" (change)="changeHandler($event)">
+<input type="number" [value]="person().age" (change)="changeHandler($event)">
 <p>(change)</p>
-<input type="text" [value]="person.name" (change)="changeHandler($event)">
+<input type="text" [value]="person().name" (change)="changeHandler($event)">
 <p>(keydown)</p>
-<input type="text" [value]="person.name" (keydown)="keydownHandler($event)">
+<input type="text" [value]="person().name" (keydown)="keydownHandler($event)">
 <p>(keydown shift)</p>
-<input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()">
+<input type="text" [value]="person().name" (keydown.shift.t)="clickHandler()">
 <p>(keyup)</p>
-<input type="text" [value]="person.name" (keyup)="changeTextKeyboard($event)">
+<input type="text" [value]="person().name" (keyup)="changeTextKeyboard($event)">
 <p>I'm the input content => {{ valueInput }}</p>
 <hr/>
 <ul>
@@ -38,5 +38,35 @@
 </ul>
 <h1>Signals</h1>
 <input type="text" [value]="name()" (change)="changeHandler($event)">
+<hr/>
+<div *ngIf="1 !==1">
+  My content
+</div>
+<input type="number" [value]="person().age" (change)="changeAge($event)">
+<div *ngIf="person().name === 'jesus' && person().age >= 18; else elseBlock">
+  Soy Jesus y soy mayor
+</div>
+<ng-template #elseBlock>Soy jesus y soy menor</ng-template>
+<hr/>
+<input type="text" [value]="person().name" (change)="changeName($event)">
+<div [ngSwitch]="person().name">
+  <p *ngSwitchCase="'jesus'">soy jesus</p>
+  <p *ngSwitchCase="'nicolas'">soy nicolas</p>
+  <p *ngSwitchCase="'ra'">soy ra</p>
+  <p *ngSwitchCase="'leumiriano'">soy lemuriano</p>
+  <p *ngSwitchCase="'arturiano'">soy arturiano</p>
+  <p *ngSwitchDefault>soy nadie</p>
+</div>
+<hr/>
+<input type="color" [formControl] = "colorCtrl">
+<p>color: {{colorCtrl.value}}</p>
+<svg>
+  <g>
+    <rect x="0" y="0" height="100" width="100" [attr.fill]="colorCtrl.value"/>
+  </g>
+</svg>
+<hr/>
+<input type="number" [formControl] = "widthCtrl">
+<span class="box" [style.width.px]= "widthCtrl.value"></span>
 
 </div>
