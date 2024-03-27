@@ -22,7 +22,7 @@ export class LabsComponent {
   img = 'https://w3schools.com/howto/img_avatar.png';
 
   person = signal({
-    name: 'jesus',
+    name: 'leumiriano',
     age: 15,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
   });
@@ -41,6 +41,14 @@ export class LabsComponent {
     const newValue = input.value;
     this.person.update((prevState) => {
       return { ...prevState, age: parseInt(newValue) };
+    });
+  }
+
+  changeName(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update((prevState) => {
+      return { ...prevState, name: newValue };
     });
   }
 
