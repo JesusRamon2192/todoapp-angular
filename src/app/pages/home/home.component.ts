@@ -46,11 +46,13 @@ export class HomeComponent {
   }
 
   toggleChecked(index: number) {
-    this.tasks.update((value) => {
-      return value.map((task, position) => {
+    this.tasks.update((tasks) => {
+      return tasks.map((task, position) => {
         if (position === index) return { ...task, completed: !task.completed };
         return task;
       });
     });
   }
+
+  updateTask(index: number) {}
 }
