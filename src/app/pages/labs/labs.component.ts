@@ -16,4 +16,14 @@ export class LabsComponent {
     'Crear proyecto',
     'Crear componentes'
   ]
+  name = "jesus";
+  age = 32;
+  disabled = true;
+  img = 'https://w3schools.com/howto/img_avatar.png';
+
+  person= {
+    name:'Nicolas',
+    age:18,
+    avatar: 'https://w3schools.com/howto/img_avatar.png'
+  }
 }
