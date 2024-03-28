@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { Task } from './../../models/task.model';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -11,18 +11,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Learn Angular',
-      completed: false,
-    },
-    {
-      id: Date.now(),
-      title: 'Crear componentes',
-      completed: false,
-    },
-  ]);
+  tasks = signal<Task[]>([]);
 
   filter = signal<'all' | 'pending' | 'completed'>('all')
   tasksByFilter = computed(()=>{
@@ -46,6 +35,22 @@ export class HomeComponent {
     ],
   });
 
+  constructor() {
+    effect(() => {
+      const tasks = this.tasks();
+      console.log(tasks);      
+      localStorage.setItem('tasks', JSON.stringify(tasks));      
+    })
+  }
+
+  ngOnInit() {
+    const storage = localStorage.getItem('tasks');
+    if(storage){
+      const tasks = JSON.parse(storage);
+      this.tasks.set(tasks)
+    }
+    
+  }
   changeHandler() {
     if (this.newTaskCtrl.valid) {
       const value = this.newTaskCtrl.value.trim();
