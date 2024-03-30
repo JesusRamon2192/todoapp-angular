@@ -92,4 +92,48 @@
 <p>
   <input type="text">
 </p>
+<hr/>
+<h2>New for</h2>
+<ul>
+  <p>total: {{ tasks().length }}</p>
+  <li *ngFor="let task of tasks(); index as i">
+    {{i}} {{task}}
+  </li>
+</ul>
+<ul>
+@for( task of tasks(); track task; let i = $index){
+<li>{{i}} {{task}}</li>
+} @empty {
+  <li><strong>la lista esta en vacio</strong></li>
+}
+</ul>
+<hr/>
+<h2>New switch</h2>
+<div [ngSwitch]="person().name">
+  <p *ngSwitchCase="'jesus'">soy jesus</p>
+  <p *ngSwitchCase="'nicolas'">soy nicolas</p>
+  <p *ngSwitchCase="'ra'">soy ra</p>
+  <p *ngSwitchCase="'lemuriano'">soy lemuriano</p>
+  <p *ngSwitchCase="'arturiano'">soy arturiano</p>
+  <p *ngSwitchDefault>soy nadie</p>
+</div>
+<div>
+@switch (person().name){
+ @case('jesus'){
+  <p>soy jesus</p>
+ }
+ @case('nicolas'){
+  <p>soy nicolas</p>
+ }
+ @case('ra'){
+  <p>soy ra</p>
+ }
+ @case('lemuriano'){
+  <p>soy lemuriano</p>
+ }
+ @case('arturiano'){
+  <p>soy arturiano</p>
+ }
+}
+</div>
 </div>
